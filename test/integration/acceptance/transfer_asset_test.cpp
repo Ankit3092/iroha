@@ -93,7 +93,7 @@ TEST_F(TransferAsset, Basic) {
  * @when execute tx with TransferAsset command
  * @then there is an empty proposal
  */
-TEST_F(TransferAsset, DISABLED_WithOnlyCanTransferPerm) {
+TEST_F(TransferAsset, WithOnlyCanTransferPerm) {
   IntegrationTestFramework(1)
       .setInitialState(kAdminKeypair)
       .sendTxAwait(makeFirstUser({}), check(1))
@@ -109,7 +109,7 @@ TEST_F(TransferAsset, DISABLED_WithOnlyCanTransferPerm) {
  * @when execute tx with TransferAsset command
  * @then there is an empty proposal
  */
-TEST_F(TransferAsset, DISABLED_WithOnlyCanReceivePerm) {
+TEST_F(TransferAsset, WithOnlyCanReceivePerm) {
   IntegrationTestFramework(1)
       .setInitialState(kAdminKeypair)
       .sendTxAwait(makeFirstUser(), check(1))
