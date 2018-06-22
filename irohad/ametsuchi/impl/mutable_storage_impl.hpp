@@ -40,10 +40,8 @@ namespace iroha {
       MutableStorageImpl(shared_model::interface::types::HashType top_hash,
                          std::unique_ptr<pqxx::lazyconnection> connection,
                          std::unique_ptr<pqxx::nontransaction> transaction);
-
-      bool check(
-          const shared_model::interface::AbstractBlock &block,
-          MutableStoragePredicateType<decltype(block)> predicate) override;
+      bool check(const shared_model::interface::AbstractBlock &block,
+                 MutableStoragePredicateType<decltype(block)> function) override;
 
       bool apply(
           const shared_model::interface::Block &block,

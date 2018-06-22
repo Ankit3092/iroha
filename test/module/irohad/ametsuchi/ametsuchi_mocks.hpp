@@ -189,6 +189,13 @@ namespace iroha {
     class MockMutableStorage : public MutableStorage {
      public:
       MOCK_METHOD2(
+          check,
+          bool(const shared_model::interface::Block &,
+               std::function<
+                   bool(const shared_model::interface::Block &,
+                        WsvQuery &,
+                        const shared_model::interface::types::HashType &)>));
+      MOCK_METHOD2(
           apply,
           bool(const shared_model::interface::Block &,
                std::function<
@@ -260,8 +267,7 @@ namespace iroha {
     class MockKeyValueStorage : public KeyValueStorage {
      public:
       MOCK_METHOD2(add, bool(Identifier, const Bytes &));
-      MOCK_CONST_METHOD1(get,
-                         boost::optional<Bytes>(Identifier));
+      MOCK_CONST_METHOD1(get, boost::optional<Bytes>(Identifier));
       MOCK_CONST_METHOD0(directory, std::string(void));
       MOCK_CONST_METHOD0(last_id, Identifier(void));
       MOCK_METHOD0(dropAll, void(void));

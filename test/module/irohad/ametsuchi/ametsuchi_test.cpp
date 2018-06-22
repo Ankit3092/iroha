@@ -667,6 +667,26 @@ TEST_F(AmetsuchiTest, TestingStorageWhenCommitBlock) {
   ASSERT_TRUE(wrapper.validate());
 }
 
+TEST_F(AmetsuchiTest, TestMutableStorageCheckBlock) {
+  std::unique_ptr<MutableStorage> mutable_storage;
+  storage->createMutableStorage().match(
+      [&mutable_storage](iroha::expected::Value<std::unique_ptr<MutableStorage>>
+                             &mut_storage) {
+        mutable_storage = std::move(mut_storage.value);
+      },
+      [](const auto &) { FAIL() << "Mutable storage cannot be created"; });
+
+  auto expected_block = getBlock();
+  ASSERT_TRUE(mutable_storage->check(
+      getBlock(),
+      [&expected_block, &storage](const auto &block, const auto &wsv_query, const auto &top_hash) {
+        ASSERT_EQ(expected_block, block);
+        ASSERT_EQ(storage->getWsvQuery(), wsv_query);
+        ASSERT_EQ(top_hash, storage->getBlockQuery()->)
+        return true;
+      }));
+}
+
 TEST_F(AmetsuchiTest, TestingStorageWhenDropAll) {
   auto logger = logger::testLog("TestStorage");
   logger->info(

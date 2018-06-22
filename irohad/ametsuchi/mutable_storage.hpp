@@ -52,9 +52,8 @@ namespace iroha {
        * false otherwise
        * @return result of predicate
        */
-      virtual bool check(
-          const shared_model::interface::AbstractBlock &block,
-          MutableStoragePredicateType<decltype(block)> predicate);
+      virtual bool check(const shared_model::interface::AbstractBlock &block,
+                         MutableStoragePredicateType<decltype(block)>) = 0;
 
       /**
        * Applies a block to current mutable state

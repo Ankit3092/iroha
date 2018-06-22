@@ -55,9 +55,7 @@ namespace iroha {
 
     bool MutableStorageImpl::apply(
         const shared_model::interface::Block &block,
-        std::function<bool(const shared_model::interface::Block &,
-                           WsvQuery &,
-                           const shared_model::interface::types::HashType &)>
+        MutableStoragePredicateType<const shared_model::interface::Block &>
             function) {
       auto execute_transaction = [this](auto &transaction) {
         command_executor_->setCreatorAccountId(transaction.creatorAccountId());
